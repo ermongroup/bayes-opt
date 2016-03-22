@@ -20,7 +20,7 @@ import BayesOptimization as BOpt
 np.random.seed(1)
 
 # load data
-data = pd.read_csv('../data.csv')
+data = pd.read_csv('data.csv')
 dt = data[(data.iloc[:,1] > 0.2) & (data.iloc[:,1] < 6.0)]
 ctrl = [x for x in data.columns if x[-5:] == 'BCTRL']
 X = dt[ctrl]
