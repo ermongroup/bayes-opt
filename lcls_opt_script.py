@@ -21,8 +21,13 @@ np.random.seed(1)
 
 # load data
 data = pd.read_csv('data.csv')
+
+# filter 'bad' y-values
 dt = data[(data.iloc[:,1] > 0.2) & (data.iloc[:,1] < 6.0)]
+
+# get list of controlled variables
 ctrl = [x for x in data.columns if x[-5:] == 'BCTRL']
+
 X = dt[ctrl]
 y = dt.iloc[:,1]
 
@@ -46,11 +51,13 @@ maxs = Xsm.max(axis=0)
 bnds = None
 
 # build a sparse GP and optimize its hyperparameters to use for online GP
+#   -  in practice we want to choose hyperparameters more intelligently
 hprior = SPGPmodel.SPGP()
 hprior.fit(Xsm, Ysm, 300)
 data_hyps = hprior.hyps
 
 # train truth model, the high-res GP that stands in for a real-world machine
+#  -  more accurate with more data, or with raster-scan style data and interpolation
 prior = OnlineGP.OGP(17, data_hyps, weighted=False, maxBV=600, prmean=1)
 prior.fit(Xsm,Ysm)
 
