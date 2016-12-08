@@ -6,12 +6,13 @@ Created on Mon Jan 25 16:19:03 2016
 
 Script to show optimization results on toy problem.
 
-Currently more sensitive to initial conditions than expected. Also currently
-uses hyperparameters that are clearly suboptimal - results are inconsistent
-based on initial sampling and whether bounds are given for acquisition.
+This is primarily meant to demonstrate the workings of the code. See
+'lcls_opt_script.py' for a comparison of algorithms on a real data set.
 
-Probably could find a better toy problem that is nonnegative, which
-might imporove consistency.
+Currently very sensitive to initial conditions. Results are 
+inconsistent based on initial sampling and whether bounds 
+are given for acquisition. A better optimization
+objective might improve consistency.
 
 """
 
